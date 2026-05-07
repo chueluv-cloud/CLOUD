@@ -1,21 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
-  --font-display: 'Space Grotesk', sans-serif;
+  --font-serif: 'Libre Baskerville', serif;
+  --font-mono: 'Space Mono', monospace;
+  --font-display: 'Libre Baskerville', serif;
 }
 
 @layer base {
   body {
-    @apply bg-[#0A0A0A] text-[#E4E3E0] antialiased;
-    font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+    @apply bg-[#0A0A0C] text-[#E4E3E0] antialiased;
+    font-family: 'Space Mono', monospace;
   }
 
   /* Custom Scrollbar for the Era Sidebar */
   .custom-scrollbar::-webkit-scrollbar {
-    width: 4px;
+    width: 2px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
@@ -23,17 +23,26 @@
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-[#E4E3E0]/10 rounded-full hover:bg-[#F27D26]/40;
+    @apply bg-[#C5A059]/20 rounded-full hover:bg-[#C5A059]/40;
   }
 }
 
 @layer components {
   .glass-panel {
-    @apply bg-[#151619] border border-[#E4E3E0]/10 backdrop-blur-md;
+    @apply bg-white/5 border border-white/10 backdrop-blur-md;
+  }
+
+  .ornate-border {
+    border: 12px solid;
+    border-image: linear-gradient(to bottom, #C5A059, #8C6239) 1;
+  }
+
+  .gold-text {
+    @apply text-[#C5A059];
+    text-shadow: 0 0 15px rgba(197, 160, 89, 0.3);
   }
 }
 
-/* CRT / Scanline Glitch Finesse */
 @keyframes scanline {
   0% { transform: translateY(-100%); }
   100% { transform: translateY(100%); }
@@ -46,11 +55,11 @@
   background: linear-gradient(
     to bottom,
     transparent,
-    rgba(242, 125, 38, 0.05) 50%,
+    rgba(197, 160, 89, 0.03) 50%,
     transparent 100%
   );
   background-size: 100% 4px;
-  animation: scanline 10s linear infinite;
+  animation: scanline 15s linear infinite;
   pointer-events: none;
 }
 

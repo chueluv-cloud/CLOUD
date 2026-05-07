@@ -190,288 +190,311 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#E4E3E0] font-sans selection:bg-[#F27D26] selection:text-white overflow-hidden">
+    <div className="min-h-screen bg-[#0A0A0C] text-[#E4E3E0] font-mono selection:bg-[#C5A059] selection:text-black overflow-hidden selection:bg-[#C5A059]">
       {/* Background Ambience */}
-      <div className="fixed inset-0 pointer-events-none opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#F27D26] rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600 rounded-full blur-[120px] animate-pulse delay-1000" />
+      <div className="fixed inset-0 pointer-events-none opacity-10">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#C5A059] rounded-full blur-[150px] animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#8C6239] rounded-full blur-[150px] animate-pulse delay-1000" />
       </div>
 
-      <main className="relative z-10 max-w-7xl mx-auto px-6 pt-12 pb-24 h-screen flex flex-col">
+      <main className="relative z-10 max-w-7xl mx-auto px-6 pt-10 pb-20 h-screen flex flex-col">
         {/* Header */}
-        <header className="flex items-center justify-between mb-12">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 border border-[#E4E3E0]/20 rounded-full flex items-center justify-center bg-[#151619] shadow-inner">
-              <Clock className="w-6 h-6 text-[#F27D26]" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-display uppercase tracking-widest font-black italic">Chronos Booth</h1>
-              <p className="text-[10px] font-mono uppercase tracking-[0.2em] opacity-40">Temporal Displacement Unit // Alpha 0.9</p>
+        <header className="flex items-center justify-between mb-8 border-b border-white/10 pb-6">
+          <div className="flex items-center gap-6">
+            <div className="flex flex-col">
+              <h1 className="text-3xl font-serif font-bold tracking-tighter text-[#C5A059] italic uppercase">Chronosnap</h1>
+              <p className="text-[9px] font-mono uppercase tracking-[0.4em] opacity-40">Temporal Imaging Laboratory // 2244.A</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-6 text-[10px] font-mono uppercase tracking-widest opacity-60">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-ping" />
-              SYSTEM READY
+          <div className="hidden md:flex items-center gap-10 text-[10px] font-mono uppercase tracking-[0.3em]">
+            <div className="flex items-center gap-2 gold-text">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059] shadow-[0_0_8px_#C5A059]" />
+              SYST_CALIBRATED
             </div>
-            <div className="w-[1px] h-4 bg-[#E4E3E0]/20" />
-            <div>CORE: GEMINI-2.5-FLASH</div>
+            <div className="opacity-40">GALLERY_INDEX</div>
+            <div className="opacity-40 text-right">
+              <div className="text-[8px] opacity-60">LOC: 40.7128 N</div>
+              <div className="text-[8px] opacity-60">EPOCH: CURRENT</div>
+            </div>
           </div>
         </header>
 
         <section className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 min-h-0">
           {/* Era Selection Sidebar */}
-          <div className="lg:col-span-4 flex flex-col gap-4 overflow-y-auto pr-2 custom-scrollbar">
+          <div className="lg:col-span-3 flex flex-col gap-4 overflow-y-auto pr-2 custom-scrollbar">
             <div className="flex items-center gap-2 mb-2">
-              <History className="w-4 h-4 opacity-40" />
-              <h2 className="text-xs font-mono uppercase tracking-widest opacity-60">Destination Database</h2>
+              <div className="text-[10px] font-mono uppercase tracking-[0.2em] opacity-50">Temporal Destinations</div>
             </div>
             
             {ERAS.map((era) => (
               <motion.button
                 key={era.id}
-                whileHover={{ x: 4 }}
+                whileHover={{ x: 2 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedEra(era)}
-                className={`group relative p-4 rounded-xl border transition-all duration-300 flex items-center gap-4 text-left ${
+                className={`group relative p-4 rounded-sm border transition-all duration-300 flex flex-col gap-1 text-left ${
                   selectedEra.id === era.id 
-                    ? 'bg-[#151619] border-[#F27D26] shadow-[0_0_20px_rgba(242,125,38,0.1)]' 
-                    : 'bg-transparent border-[#E4E3E0]/10 hover:border-[#E4E3E0]/30'
+                    ? 'glass-panel border-l-4 border-l-[#C5A059] shadow-[0_0_30px_rgba(197,160,89,0.05)]' 
+                    : 'bg-transparent border-transparent opacity-40 hover:opacity-100'
                 }`}
               >
-                <div 
-                  className="w-12 h-12 rounded-lg flex-shrink-0 flex items-center justify-center bg-[#1A1A1A] border border-[#E4E3E0]/10"
-                  style={{ color: era.color }}
-                >
-                  <Globe className="w-6 h-6" />
+                <div className="flex items-center justify-between mb-1">
+                  <h3 className="font-serif text-lg tracking-tight group-hover:text-[#C5A059] transition-colors">{era.name}</h3>
+                  <span className="text-[9px] font-mono opacity-50">{era.year}</span>
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-bold text-sm tracking-tight">{era.name}</h3>
-                    <span className="text-[10px] font-mono opacity-40">{era.year}</span>
-                  </div>
-                  <p className="text-[11px] opacity-40 leading-relaxed line-clamp-1 group-hover:line-clamp-none transition-all">
-                    {era.description}
-                  </p>
-                </div>
-                {selectedEra.id === era.id && (
-                  <motion.div 
-                    layoutId="active-indicator"
-                    className="absolute -left-1 top-1/2 -translate-y-1/2 w-1 h-8 bg-[#F27D26] rounded-full"
-                  />
-                )}
+                <p className="text-[9px] opacity-40 uppercase tracking-widest leading-relaxed">
+                  {era.description.split('.')[0]}
+                </p>
               </motion.button>
             ))}
+
+            <div className="mt-auto pt-6">
+              <div className="glass-panel p-4 rounded-sm">
+                <div className="flex justify-between text-[10px] mb-2 uppercase tracking-widest">
+                  <span className="opacity-60">Sync_Lock</span>
+                  <span className="text-[#C5A059]">Engaged</span>
+                </div>
+                <div className="h-[2px] bg-white/10 rounded-full overflow-hidden">
+                  <motion.div 
+                    animate={{ width: ['0%', '100%'] }}
+                    transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+                    className="h-full bg-[#C5A059]" 
+                  />
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Main Stage */}
-          <div className="lg:col-span-8 bg-[#151619] rounded-3xl border border-[#E4E3E0]/10 relative overflow-hidden flex flex-col shadow-2xl">
-            <AnimatePresence mode="wait">
-              {state === 'IDLE' && (
-                <motion.div
-                  key="idle"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex-1 flex flex-col items-center justify-center p-12 text-center"
-                >
-                  <div className="w-32 h-32 mb-8 relative">
-                    <motion.div 
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                      className="absolute inset-0 border border-dashed border-[#F27D26]/40 rounded-full"
-                    />
-                    <div className="absolute inset-4 border border-[#F27D26]/20 rounded-full animate-pulse" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <Camera className="w-12 h-12 text-[#F27D26]" />
-                    </div>
-                  </div>
-                  <h2 className="text-4xl font-display italic uppercase mb-4 tracking-tighter">Enter the Slipstream</h2>
-                  <p className="max-w-md mx-auto text-sm opacity-50 leading-relaxed mb-10">
-                    Our temporal displacement unit requires a biological footprint to synchronize with the target era. 
-                    Prepare for synchronization.
-                  </p>
-                  <button
-                    id="init-camera-btn"
-                    onClick={startCamera}
-                    className="group bg-[#F27D26] hover:bg-[#F27D26]/90 text-white px-10 py-5 rounded-full font-bold uppercase tracking-widest text-xs flex items-center gap-3 transition-all transform hover:scale-105 active:scale-95 shadow-[0_10px_30px_rgba(242,125,38,0.3)]"
+          <div className="lg:col-span-7 flex flex-col gap-4 relative">
+            <div className="flex-1 bg-[#111113] ornate-border relative overflow-hidden flex flex-col group shadow-2xl">
+              <AnimatePresence mode="wait">
+                {state === 'IDLE' && (
+                  <motion.div
+                    key="idle"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex-1 flex flex-col items-center justify-center p-12 text-center relative"
                   >
-                    Initialize Connection
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </button>
-                </motion.div>
-              )}
-
-              {state === 'CAMERA' && (
-                <motion.div
-                  key="camera"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex-1 relative flex flex-col"
-                >
-                  <div className="flex-1 bg-black relative flex items-center justify-center">
-                    <video
-                      ref={videoRef}
-                      autoPlay
-                      playsInline
-                      muted
-                      className="w-full h-full object-cover scale-x-[-1]"
-                    />
-                    
-                    {/* Camera Overlays */}
-                    <div className="absolute inset-0 border-[40px] border-[#151619]/60 pointer-events-none" />
-                    <div className="absolute inset-[40px] border border-[#E4E3E0]/10 pointer-events-none" />
-                    
-                    {/* Focus Markings */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-64 border-2 border-[#F27D26]/40 rounded-[60px] pointer-events-none">
-                      <div className="absolute -top-1 left-1/2 -translate-x-1/2 px-2 bg-[#151619] text-[8px] font-mono text-[#F27D26]/60">EYE_LINE</div>
-                    </div>
-                  </div>
-
-                  <div className="p-8 flex items-center justify-between border-t border-[#E4E3E0]/10">
-                    <div className="flex items-center gap-4 text-[10px] font-mono opacity-40 uppercase">
-                      <div className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
-                        LIVE_FEED
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(197,160,89,0.05)_0%,transparent_70%)]" />
+                    <div className="w-32 h-32 mb-8 relative">
+                      <motion.div 
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+                        className="absolute inset-0 border border-dashed border-[#C5A059]/20 rounded-full"
+                      />
+                      <div className="absolute inset-4 border border-[#C5A059]/10 rounded-full" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <Camera className="w-10 h-10 text-[#C5A059] opacity-40 group-hover:opacity-100 transition-opacity" />
                       </div>
-                      <div>POS: {selectedEra.name} // {selectedEra.year}</div>
                     </div>
-
+                    <h2 className="text-3xl font-serif italic mb-4 tracking-tighter gold-text">Initiate Exposure</h2>
+                    <p className="max-w-xs mx-auto text-[10px] uppercase tracking-[0.2em] opacity-40 leading-relaxed mb-10">
+                      Align biological sensors to synchronize with the selected temporal epoch.
+                    </p>
                     <button
-                      id="capture-photo-btn"
-                      onClick={capturePhoto}
-                      disabled={state === 'PROCESSING'}
-                      className="w-20 h-20 rounded-full border-4 border-[#F27D26] p-1 group flex-shrink-0 transition-all hover:scale-110 active:scale-90"
+                      id="init-camera-btn"
+                      onClick={startCamera}
+                      className="group border border-[#C5A059]/40 hover:bg-[#C5A059] hover:text-black text-[#C5A059] px-10 py-4 rounded-sm font-bold uppercase tracking-[0.3em] text-[10px] flex items-center gap-3 transition-all transform active:scale-95 shadow-[0_0_20px_rgba(197,160,89,0.1)]"
                     >
-                      <div className="w-full h-full rounded-full bg-white group-hover:bg-[#F27D26]/20 transition-colors flex items-center justify-center">
-                        <div className="w-4 h-4 bg-[#F27D26] rounded-sm transform rotate-45" />
-                      </div>
+                      Connect Probe
+                      <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
                     </button>
+                  </motion.div>
+                )}
 
-                    <button
-                      id="cancel-camera-btn"
-                      onClick={reset}
-                      className="text-[10px] font-mono uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity"
-                    >
-                      Abort Mission
-                    </button>
-                  </div>
-                </motion.div>
-              )}
-
-              {state === 'PROCESSING' && (
-                <motion.div
-                  key="processing"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex-1 flex flex-col items-center justify-center p-12 text-center"
-                >
-                  <div className="w-48 h-48 mb-12 relative flex items-center justify-center">
-                    <motion.div 
-                      animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className="absolute inset-0 bg-[#F27D26]/20 rounded-full blur-3xl"
-                    />
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-                      className="absolute inset-0 border-r-4 border-[#F27D26] rounded-full"
-                    />
-                    <Sparkles className="w-12 h-12 text-[#F27D26]" />
-                  </div>
-                  <h2 className="text-3xl font-display italic uppercase mb-2 tracking-tighter">Bending Time</h2>
-                  <p className="text-xs font-mono uppercase tracking-[0.3em] opacity-40 animate-pulse">
-                    Materializing into {selectedEra.name}...
-                  </p>
-                  
-                  <div className="mt-12 w-full max-w-xs h-1 bg-[#E4E3E0]/10 rounded-full overflow-hidden">
-                    <motion.div 
-                      initial={{ x: '-100%' }}
-                      animate={{ x: '100%' }}
-                      transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                      className="w-1/2 h-full bg-[#F27D26]"
-                    />
-                  </div>
-                </motion.div>
-              )}
-
-              {state === 'RESULT' && resultImage && (
-                <motion.div
-                  key="result"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.05 }}
-                  className="flex-1 flex flex-col"
-                >
-                  <div className="flex-1 bg-black relative group overflow-hidden">
-                    <img 
-                      src={resultImage} 
-                      alt="Temporal Result"
-                      className="w-full h-full object-cover"
-                      referrerPolicy="no-referrer"
-                    />
-                    
-                    {/* Dramatic Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-                    
-                    <div className="absolute bottom-8 left-8 right-8 flex items-end justify-between">
-                      <div>
-                        <div className="text-[10px] font-mono text-[#F27D26] mb-1">ARRIVAL IDENTIFIED</div>
-                        <h3 className="text-3xl font-display uppercase italic tracking-tighter font-black">
-                          {selectedEra.name}
-                        </h3>
-                        <p className="text-[10px] font-mono opacity-60 uppercase">{selectedEra.year} // CHRONOS UNIT VALIDATED</p>
+                {state === 'CAMERA' && (
+                  <motion.div
+                    key="camera"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex-1 relative flex flex-col"
+                  >
+                    <div className="flex-1 bg-black relative flex items-center justify-center">
+                      <video
+                        ref={videoRef}
+                        autoPlay
+                        playsInline
+                        muted
+                        className="w-full h-full object-cover grayscale opacity-60 mix-blend-screen"
+                      />
+                      
+                      {/* Technical Overlays */}
+                      <div className="absolute inset-0 border-[20px] border-[#0A0A0C]/80 pointer-events-none" />
+                      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                        <div className="w-64 h-80 border border-dashed border-[#C5A059]/40 rounded-full flex items-center justify-center">
+                          <span className="text-[10px] uppercase tracking-[0.4em] text-[#C5A059] opacity-40">ALIGN_FACE_V.01</span>
+                        </div>
                       </div>
                       
-                      <div className="flex gap-2">
-                        <button
-                          id="download-btn"
-                          onClick={() => {
-                            const link = document.createElement('a');
-                            link.href = resultImage;
-                            link.download = `chronos_booth_${selectedEra.id}.png`;
-                            link.click();
-                          }}
-                          className="p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full border border-white/10 transition-all"
-                        >
-                          <Download className="w-5 h-5 text-white" />
-                        </button>
-                        <button
-                          id="share-btn"
-                          className="p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full border border-white/10 transition-all"
-                        >
-                          <Share2 className="w-5 h-5 text-white" />
-                        </button>
+                      <div className="absolute top-6 right-6 text-[9px] bg-black/80 px-3 py-1 border border-[#C5A059]/30 text-[#C5A059]">
+                        LIVE_FEED // DEST: {selectedEra.id.toUpperCase()}
                       </div>
                     </div>
 
-                    {/* Scanlines Effect */}
-                    <div className="absolute inset-0 pointer-events-none opacity-10 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%]" />
-                  </div>
-
-                  <div className="p-8 flex items-center justify-between border-t border-[#E4E3E0]/10 bg-[#151619]">
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 border border-[#E4E3E0]/10 rounded-full flex items-center justify-center">
-                        <RefreshCw className="w-4 h-4 opacity-40 hover:rotate-180 transition-transform cursor-pointer" onClick={() => { setState('CAMERA'); startCamera(); }} />
-                      </div>
-                      <p className="text-[10px] font-mono opacity-40 uppercase tracking-widest">Temporal Signature Locked</p>
+                    <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20">
+                      <button
+                        id="capture-photo-btn"
+                        onClick={capturePhoto}
+                        disabled={state === 'PROCESSING'}
+                        className="bg-[#C5A059] text-black px-12 py-4 rounded-sm font-bold uppercase tracking-[0.4em] text-xs hover:bg-[#D4B57A] transition-all transform active:scale-95 shadow-2xl flex items-center gap-3"
+                      >
+                        Engage Warp
+                        <Zap className="w-3 h-3" />
+                      </button>
                     </div>
 
-                    <button
-                      id="new-voyage-btn"
-                      onClick={reset}
-                      className="bg-[#F27D26] hover:bg-[#F27D26]/90 text-white px-8 py-3 rounded-full font-bold uppercase tracking-widest text-[10px] transition-all transform hover:scale-105 active:scale-95 shadow-lg flex items-center gap-2"
-                    >
-                      <Zap className="w-3 h-3" />
-                      New Voyage
-                    </button>
+                    <div className="absolute top-6 left-6 flex gap-2">
+                      <div className="w-2 h-2 rounded-full bg-[#C5A059] animate-pulse"></div>
+                      <div className="w-2 h-2 rounded-full bg-white/10"></div>
+                      <div className="w-2 h-2 rounded-full bg-white/10"></div>
+                    </div>
+                  </motion.div>
+                )}
+
+                {state === 'PROCESSING' && (
+                  <motion.div
+                    key="processing"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex-1 flex flex-col items-center justify-center p-12 text-center"
+                  >
+                    <div className="absolute inset-0 scanline-effect opacity-50" />
+                    <div className="w-48 h-48 mb-12 relative flex items-center justify-center">
+                      <motion.div 
+                        animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                        className="absolute inset-0 bg-[#C5A059]/10 rounded-full blur-3xl"
+                      />
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+                        className="absolute inset-0 border-t border-[#C5A059] rounded-full"
+                      />
+                      <Sparkles className="w-10 h-10 text-[#C5A059]" />
+                    </div>
+                    <h2 className="text-2xl font-serif italic mb-2 tracking-tighter gold-text">Reconstructing Reality</h2>
+                    <p className="text-[9px] font-mono uppercase tracking-[0.5em] opacity-40 animate-pulse">
+                      Synthesizing {selectedEra.year} Displacement Field...
+                    </p>
+                  </motion.div>
+                )}
+
+                {state === 'RESULT' && resultImage && (
+                  <motion.div
+                    key="result"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex-1 flex flex-col relative"
+                  >
+                    <div className="flex-1 bg-black relative overflow-hidden">
+                      <img 
+                        src={resultImage} 
+                        alt="Temporal Result"
+                        className="w-full h-full object-cover mix-blend-lighten"
+                        referrerPolicy="no-referrer"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                      
+                      <div className="absolute inset-0 scanline-effect opacity-20 pointer-events-none" />
+
+                      <div className="absolute bottom-10 left-10 right-10 flex items-end justify-between">
+                        <div>
+                          <div className="text-[9px] font-mono text-[#C5A059] mb-1 tracking-[0.4em]">EPOCH_IDENTIFIED</div>
+                          <h3 className="text-4xl font-serif uppercase italic tracking-tighter font-bold gold-text">
+                            {selectedEra.name}
+                          </h3>
+                        </div>
+                        
+                        <div className="flex gap-4">
+                          <button
+                            id="download-btn"
+                            onClick={() => {
+                              const link = document.createElement('a');
+                              link.href = resultImage;
+                              link.download = `chronsnap_${selectedEra.id}.png`;
+                              link.click();
+                            }}
+                            className="p-4 border border-white/20 hover:bg-white text-white hover:text-black transition-all rounded-sm backdrop-blur-md"
+                          >
+                            <Download className="w-5 h-5" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Thumbnail Strip */}
+            <div className="h-24 flex gap-4 overflow-hidden py-2">
+              <div className="w-32 glass-panel border-white/5 grayscale flex-shrink-0 animate-pulse"></div>
+              <div className="w-32 glass-panel border-white/5 opacity-50 flex-shrink-0"></div>
+              <div className="w-32 glass-panel border-white/5 opacity-20 flex-shrink-0"></div>
+              <div className="w-32 glass-panel border-white/5 opacity-5 flex-shrink-0"></div>
+            </div>
+          </div>
+
+          {/* Right Controls */}
+          <aside className="lg:col-span-2 flex flex-col gap-10">
+            <div className="flex flex-col gap-6">
+              <span className="text-[9px] uppercase tracking-[0.3em] opacity-50 border-b border-white/10 pb-2">Calibration</span>
+              <div className="space-y-6">
+                {[
+                  { label: 'BLENDING', value: '82%' },
+                  { label: 'GRAIN', value: '14%' },
+                  { label: 'SEPIA', value: '45%' },
+                ].map((stat) => (
+                  <div key={stat.label} className="space-y-2">
+                    <div className="flex justify-between text-[9px] font-mono">
+                      <span>{stat.label}</span>
+                      <span className="text-[#C5A059]">{stat.value}</span>
+                    </div>
+                    <div className="h-[1px] bg-white/10 w-full relative">
+                      <div className="absolute top-1/2 -translate-y-1/2 left-[82%] w-1.5 h-1.5 bg-[#C5A059] rotate-45 shadow-[0_0_8px_rgba(197,160,89,0.5)]"></div>
+                    </div>
                   </div>
-                </motion.div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-auto space-y-3">
+              {state === 'RESULT' && (
+                <button
+                  id="new-voyage-btn"
+                  onClick={reset}
+                  className="w-full py-4 glass-panel text-[10px] uppercase tracking-[0.3em] hover:bg-[#C5A059] hover:text-black transition-all duration-500 rounded-sm"
+                >
+                  New Analysis
+                </button>
               )}
-            </AnimatePresence>
+              <button className="w-full py-4 border border-white/10 text-[10px] uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-500 rounded-sm opacity-60">
+                Save Archive
+              </button>
+            </div>
+
+            <div className="p-4 glass-panel text-[8px] leading-relaxed opacity-40 italic rounded-sm">
+              Temporal drift may occur during high-fidelity reconstruct. Maintain biological stillness.
+            </div>
+          </aside>
+        </section>
+
+        {/* Footer Technical Metadata */}
+        <footer className="mt-8 pt-4 border-t border-white/5 flex items-center justify-between text-[8px] font-mono opacity-30 uppercase tracking-[0.4em]">
+          <div>T-COORD: {selectedEra.id.toUpperCase()} // LAT: 40.7128 N // LONG: 74.0060 W</div>
+          <div>SYST_RECON: GEMINI // STATUS: PASS</div>
+        </footer>
+      </main>
+
+      <canvas ref={canvasRef} className="hidden" />
+    </div>
+  );
 
             {error && (
               <div className="absolute top-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-red-600/90 backdrop-blur-sm text-white text-[10px] font-mono rounded-full flex items-center gap-2 z-50">
