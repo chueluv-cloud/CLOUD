@@ -1,0 +1,6 @@
+{
+  "name": "Chronos Booth",
+  "description": "Travel through history with an AI-powered photo booth that inserts you into iconic eras.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["image-generation"]
+}
